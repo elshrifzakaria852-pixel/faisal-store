@@ -5,26 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الفيصل - برنامجي الخاص</title>
 <style>
-*{box-sizing:border-box;font-family:Tahoma}body{background:#0f0f0f;margin:0;color:#fff}
-.header{background:#000;padding:18px;text-align:center}.card{background:#1a1a1a;border-radius:16px;padding:18px;max-width:480px;margin:14px auto;border:1px solid #2a2a2a}
-input,button{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:1px solid #333;background:#222;color:#fff} button{background:#fff;color:#000;font-weight:bold;border:none}
-.preview{width:100%;display:none;border-radius:12px;margin:8px 0}.p-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.p{background:#222;border-radius:12px;padding:8px;text-align:center;position:relative}.p img{width:100%;height:110px;object-fit:cover;border-radius:8px}.del{position:absolute;top:4px;left:4px;background:#ff2d2d;color:#fff;border:none;border-radius:50%;width:26px;height:26px} #login{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}.small{font-size:12px;color:#888;text-align:center}
+*{box-sizing:border-box;font-family:Tahoma}
+body{background:#0f0f0f;margin:0;color:#fff}
+.header{background:#000;padding:18px;text-align:center;border-bottom:2px solid #333}
+.card{background:#1a1a1a;border-radius:16px;padding:18px;max-width:480px;margin:14px auto;border:1px solid #2a2a2a}
+input,button{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:1px solid #333;background:#222;color:#fff;font-size:16px}
+button{background:#fff;color:#000;font-weight:bold;border:none;cursor:pointer}
+.preview{width:100%;display:none;border-radius:12px;margin:8px 0;max-height:250px;object-fit:cover}
+.p-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.p{background:#222;border-radius:12px;padding:8px;text-align:center;position:relative}
+.p img{width:100%;height:110px;object-fit:cover;border-radius:8px}
+.del{position:absolute;top:4px;left:4px;background:#ff2d2d;color:#fff;border:none;border-radius:50%;width:26px;height:26px;padding:0}
+#login{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.small{font-size:12px;color:#888;text-align:center}
 </style>
 </head>
 <body>
-<div id="login"><div class="card"><h2 style="text-align:center">🔒 برنامج الفيصل الخاص</h2><input type="password" id="pass" placeholder="الباسورد"><button onclick="if(pass.value==='1'){login.style.display='none';render()}else alert('غلط')">دخول</button><p class="small">الباسورد: 1</p></div></div>
-<div class="header"><h1>الفيصل ستور 👟</h1><p class="small">01120718172</p></div>
-<div class="card"><h3>➕ منتج جديد</h3><input id="name" placeholder="اسم المنتج"><input id="price" type="number" placeholder="السعر"><input id="imgFile" type="file" accept="image/*"><img id="preview" class="preview"><button onclick="addProduct()">🚀 اضافة ونشر</button></div>
-<div class="card"><h3>📦 منتجاتي (<span id="count">0</span>)</h3><div id="grid" class="p-grid"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button onclick="exportWA()" style="background:#0a84ff;color:#fff">📤 نسخ واتساب</button><button onclick="imp.click()" style="background:#222;color:#fff;border:1px solid #444">📥 استرجاع</button></div><input type="file" id="imp" accept=".json" style="display:none"><button onclick="window.open('index.html','_blank')" style="background:#222;color:#fff;border:1px solid #444;margin-top:8px">👁️ فتح موقع الزباين</button><p id="msg" class="small" style="color:#00ff88"></p></div>
+<div id="login"><div class="card"><h2 style="text-align:center">🔒 برنامج الفيصل الخاص</h2><input type="password" id="pass" placeholder="الباسورد"><button onclick="if(document.getElementById('pass').value==='1'){document.getElementById('login').style.display='none';render()}else alert('الباسورد غلط')">دخول</button><p class="small">الباسورد: 1 - رقمك: 01120718172</p></div></div>
+<div class="header"><h1>الفيصل ستور 👟</h1><p class="small">برنامجك الخاص - 01120718172</p></div>
+<div class="card"><h3>➕ منتج جديد</h3><input id="name" placeholder="اسم المنتج مثلا: كوتشي نايك"><input id="price" type="number" placeholder="السعر مثلا: 550"><input id="imgFile" type="file" accept="image/*"><img id="preview" class="preview"><button onclick="addProduct()">🚀 اضافة ونشر في الموقع</button></div>
+<div class="card"><h3>📦 منتجاتي (<span id="count">0</span>)</h3><div id="grid" class="p-grid"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button onclick="exportWA()" style="background:#0a84ff;color:#fff">📤 نسخ احتياطي</button><button onclick="document.getElementById('imp').click()" style="background:#222;color:#fff;border:1px solid #444">📥 استرجاع</button></div><input type="file" id="imp" accept=".json" style="display:none"><button onclick="window.open('index.html','_blank')" style="background:#222;color:#fff;border:1px solid #444;margin-top:8px">👁️ فتح موقع الزباين</button><p id="msg" class="small" style="color:#00ff88"></p></div>
 <script>
-let products=JSON.parse(localStorage.getItem('faisal_private_products')||'[]');let curImg='';
+let products=JSON.parse(localStorage.getItem('faisal_private_products')||'[]');
+let curImg='';
 document.getElementById('imgFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{curImg=ev.target.result;let p=document.getElementById('preview');p.src=curImg;p.style.display='block';};r.readAsDataURL(f);});
-function addProduct(){const n=name.value.trim();const pr=price.value.trim();if(!n||!pr||!curImg){alert('املا البيانات');return}products.unshift({id:Date.now(),name:n,price:pr,img:curImg});localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));name.value='';price.value='';imgFile.value='';preview.style.display='none';curImg='';render();msg.innerText='تم ✅';}
-function render(){count.innerText=products.length;grid.innerHTML=products.map(p=>`<div class="p"><button class="del" onclick="delP(${p.id})">x</button><img src="${p.img}"><div style="font-size:13px">${p.name}</div><div style="color:#00ff88">${p.price} جنيه</div></div>`).join('')||'<p class="small" style="grid-column:1/-1">فاضي</p>';}
-function delP(id){if(!confirm('تمسح؟'))return;products=products.filter(p=>p.id!==id);localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));render();}
-function exportWA(){if(!products.length){alert('مفيش');return}const blob=new Blob([JSON.stringify(products)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='faisal-backup.json';a.click();setTimeout(()=>window.open('https://wa.me/201120718172?text='+encodeURIComponent('نسخة منتجات الفيصل')),'_blank');}
-imp.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const arr=JSON.parse(ev.target.result);if(Array.isArray(arr)){products=arr;localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));render();msg.innerText='تم '+arr.length;}}catch{alert('ملف غلط')}};r.readAsText(f);});
+function addProduct(){const n=document.getElementById('name').value.trim();const pr=document.getElementById('price').value.trim();if(!n||!pr||!curImg){alert('املا الاسم والسعر والصورة');return}products.unshift({id:Date.now(),name:n,price:pr,img:curImg});localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));document.getElementById('name').value='';document.getElementById('price').value='';document.getElementById('imgFile').value='';document.getElementById('preview').style.display='none';curImg='';render();document.getElementById('msg').innerText='تمت الاضافة ✅ المنتج ظهر في موقع الزباين';}
+function render(){document.getElementById('count').innerText=products.length;document.getElementById('grid').innerHTML=products.map(p=>`<div class="p"><button class="del" onclick="delP(${p.id})">x</button><img src="${p.img}"><div style="font-size:13px;margin-top:4px">${p.name}</div><div style="color:#00ff88;font-weight:bold">${p.price} جنيه</div></div>`).join('')||'<p class="small" style="grid-column:1/-1">لسه مفيش منتجات - ضيف اول منتج فوق</p>';}
+function delP(id){if(!confirm('تمسح المنتج ده؟'))return;products=products.filter(p=>p.id!==id);localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));render();}
+function exportWA(){if(!products.length){alert('مفيش منتجات');return}const blob=new Blob([JSON.stringify(products)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='faisal-backup.json';a.click();}
+document.getElementById('imp').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const arr=JSON.parse(ev.target.result);if(Array.isArray(arr)){products=arr;localStorage.setItem('faisal_private_products',JSON.stringify(products));localStorage.setItem('faisal_products',JSON.stringify(products));render();document.getElementById('msg').innerText='تم الاسترجاع '+arr.length+' منتج';}}catch{alert('ملف غلط')}};r.readAsText(f);});
 render();
 </script>
 </body>
-</html>
+                                                                                                   </html>
