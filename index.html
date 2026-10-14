@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<div class="logo">فيصل <span>للسبوع والمناسبات</span></div>
+<title>Faisal Store - طنطا | لوازم السبوع واعياد الميلاد</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
@@ -90,4 +90,4 @@ function closeCart(){document.getElementById('cart-drawer').classList.remove('op
 function checkout(){if(!cart.length){alert('السلة فاضية');return;}let msg="السلام عليكم Faisal Store%0Aعايز اطلب:%0A%0A";cart.forEach(i=>{msg+=`- ${i.name} (${i.qty}) = ${i.price*i.qty}ج%0A`;});msg+=`%0Aالإجمالي: ${cart.reduce((s,i)=>s+i.price*i.qty,0)} جنيه`;window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");}
 </script>
 </body>
-</html>
+  </html>
