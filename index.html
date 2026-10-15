@@ -19,9 +19,8 @@ header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid
 .cat.active{background:#7c2d12;color:#fff;border-color:#7c2d12}
 .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;padding:15px 4%}
 .card{background:#fff;border-radius:16px;padding:15px;box-shadow:0 3px 12px rgba(0,0,0,0.05);border:1px solid #fff1e6;text-align:center}
-.card h3{font-size:13px;color:#431407;margin-bottom:8px}
-.price{color:#ea580c;font-weight:800;font-size:15px;margin:6px 0}
-.add-btn{width:100%;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;padding:7px;border-radius:8px;font-weight:800;font-size:12px;cursor:pointer;margin-top:8px}
+.card h3{font-size:13px;color:#431407;margin-bottom:10px;height:36px}
+.add-btn{width:100%;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;padding:7px;border-radius:8px;font-weight:800;font-size:12px;cursor:pointer}
 #cart-drawer{position:fixed;top:0;left:-100%;width:88%;max-width:360px;height:100%;background:#fff;z-index:300;transition:0.3s;padding:18px;display:flex;flex-direction:column}
 #cart-drawer.open{left:0}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;z-index:250}
@@ -42,30 +41,30 @@ footer{background:#431407;color:#ffedd5;padding:25px 5%;text-align:center;font-s
 <button class="cat" onclick="filterCat('اعياد ميلاد',this)">اعياد ميلاد</button>
 </div>
 <div class="products" id="products"></div>
-<div id="cart-drawer"><h3 style="color:#7c2d12">سلة الطلبات</h3><div id="cart-items" style="flex:1;overflow:auto;margin-top:12px"></div><div style="border-top:1px dashed #fed7aa;padding-top:10px"><div style="display:flex;justify-content:space-between;font-weight:800"><span>الاجمالي:</span><span id="total" style="color:#ea580c">0 جنيه</span></div><button onclick="checkout()" style="width:100%;background:#25D366;color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800;margin-top:10px;cursor:pointer">اتمام الطلب واتساب</button><button onclick="closeCart()" style="width:100%;margin-top:7px;background:#fff7ed;border:1px solid #fed7aa;padding:8px;border-radius:8px;cursor:pointer">متابعة</button></div></div>
+<div id="cart-drawer"><h3 style="color:#7c2d12">سلة الطلبات</h3><div id="cart-items" style="flex:1;overflow:auto;margin-top:12px"></div><div style="border-top:1px dashed #fed7aa;padding-top:10px"><button onclick="checkout()" style="width:100%;background:#25D366;color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800;margin-top:10px;cursor:pointer">اتمام الطلب واتساب</button><button onclick="closeCart()" style="width:100%;margin-top:7px;background:#fff7ed;border:1px solid #fed7aa;padding:8px;border-radius:8px;cursor:pointer">متابعة</button></div></div>
 <footer><h3>فيصل للسبوع والمناسبات - طنطا</h3><p>واتساب: 01120718172</p></footer>
 <script>
 const WHATSAPP="201120718172";
 const products=[
-{id:1,name:"علبة سبوع كرتون 50 قطعة",price:300,cat:"علب السبوع"},
-{id:2,name:"علبة سبوع قطيفة فاخرة",price:550,cat:"علب السبوع"},
-{id:3,name:"ديكور سبوع ولد كامل",price:450,cat:"ديكور"},
-{id:4,name:"ديكور سبوع بنت روز جولد",price:480,cat:"ديكور"},
-{id:5,name:"طقم لعب اطفال سبوع",price:120,cat:"لعب اطفال"},
-{id:6,name:"شوكولاتة سبوع بالاسم",price:400,cat:"شوكولاتة"},
-{id:7,name:"طقم عيد ميلاد 10 افراد",price:250,cat:"اعياد ميلاد"},
-{id:8,name:"زينة عيد ميلاد",price:120,cat:"اعياد ميلاد"},
+{id:1,name:"علبة سبوع كرتون 50 قطعة",cat:"علب السبوع"},
+{id:2,name:"علبة سبوع قطيفة فاخرة",cat:"علب السبوع"},
+{id:3,name:"ديكور سبوع ولد كامل",cat:"ديكور"},
+{id:4,name:"ديكور سبوع بنت روز جولد",cat:"ديكور"},
+{id:5,name:"طقم لعب اطفال سبوع",cat:"لعب اطفال"},
+{id:6,name:"شوكولاتة سبوع بالاسم",cat:"شوكولاتة"},
+{id:7,name:"طقم عيد ميلاد 10 افراد",cat:"اعياد ميلاد"},
+{id:8,name:"زينة عيد ميلاد",cat:"اعياد ميلاد"},
 ];
 let cart=[];
-function render(list){document.getElementById('products').innerHTML=list.map(p=>`<div class="card"><h3>${p.name}</h3><div class="price">${p.price} جنيه</div><button class="add-btn" onclick="addToCart(${p.id})">اضف للسلة</button></div>`).join('');}
+function render(list){document.getElementById('products').innerHTML=list.map(p=>`<div class="card"><h3>${p.name}</h3><button class="add-btn" onclick="addToCart(${p.id})">اضف للسلة</button></div>`).join('');}
 render(products);
 function filterCat(c,el){document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));el.classList.add('active');if(c==='all')render(products);else render(products.filter(p=>p.cat===c));}
 function addToCart(id){let p=products.find(x=>x.id===id);let ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({...p,qty:1});update();openCart();}
-function update(){document.getElementById('cart-count').innerText=cart.reduce((s,i)=>s+i.qty,0);let d=document.getElementById('cart-items');if(!cart.length)d.innerHTML="<p style='text-align:center;color:#888'>السلة فارغة</p>";else d.innerHTML=cart.map(i=>`<div style='display:flex;justify-content:space-between;margin-bottom:10px;border-bottom:1px solid #ffedd5;padding-bottom:8px'><div><div style='font-size:12px;font-weight:700'>${i.name}</div><div style='color:#ea580c;font-weight:800'>${i.price}ج x ${i.qty}</div></div><button onclick='removeItem(${i.id})' style='color:red;background:none;border:none'>حذف</button></div>`).join('');document.getElementById('total').innerText=cart.reduce((s,i)=>s+i.price*i.qty,0)+" جنيه";}
+function update(){document.getElementById('cart-count').innerText=cart.reduce((s,i)=>s+i.qty,0);let d=document.getElementById('cart-items');if(!cart.length)d.innerHTML="<p style='text-align:center;color:#888'>السلة فارغة</p>";else d.innerHTML=cart.map(i=>`<div style='display:flex;justify-content:space-between;margin-bottom:10px;border-bottom:1px solid #ffedd5;padding-bottom:8px'><div><div style='font-size:12px;font-weight:700'>${i.name} x ${i.qty}</div></div><button onclick='removeItem(${i.id})' style='color:red;background:none;border:none'>حذف</button></div>`).join('');}
 function removeItem(id){cart=cart.filter(i=>i.id!==id);update();}
 function openCart(){document.getElementById('cart-drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-function checkout(){if(!cart.length){alert('السلة فارغة');return;}let msg="السلام عليكم فيصل للسبوع والمناسبات%0Aطلب جديد:%0A";cart.forEach(i=>{msg+=`- ${i.name} (${i.qty}) = ${i.price*i.qty}ج%0A`;});msg+=`%0Aالاجمالي: ${cart.reduce((s,i)=>s+i.price*i.qty,0)}ج`;window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");}
+function checkout(){if(!cart.length){alert('السلة فارغة');return;}let msg="السلام عليكم فيصل للسبوع والمناسبات%0Aطلب جديد:%0A";cart.forEach(i=>{msg+=`- ${i.name} (الكمية: ${i.qty})%0A`;});window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");}
 </script>
 </body>
 </html>
