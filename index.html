@@ -2,37 +2,40 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>الفيصل ستور - طنطا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيصل للسبوع والمناسبات - طنطا</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-body{background:#0f0f0f;color:#fff;font-family:system-ui;text-align:center;margin:0}
-.header{background:#0a1a0a;padding:20px;border-bottom:3px solid #00ff66}
-.header h1{color:#00ff66;margin:0;font-size:28px}
-.header p{font-size:18px;margin:5px}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:15px}
-.card{background:#1a1a1a;border-radius:15px;overflow:hidden;border:1px solid #333}
-.card img{width:100%;height:220px;object-fit:cover}
-.card .info{padding:10px}
-.card .name{font-size:16px;font-weight:bold}
-.card .price{color:#ffcc00;font-weight:bold;margin:5px 0}
-.card .btn{display:block;background:#00a650;color:#fff;padding:10px;border-radius:10px;text-decoration:none;font-weight:bold;margin-top:8px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#fffaf7}
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #fde68a;display:flex;justify-content:space-between;align-items:center;padding:12px 4%}
+.logo{font-weight:800;font-size:18px;color:#7c2d12}
+.logo span{color:#ea580c}
+.cart-btn{position:relative;background:#7c2d12;color:#fff;border:none;padding:9px 18px;border-radius:30px;font-weight:800}
+#cart-count{position:absolute;top:-6px;left:-6px;background:red;color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;padding:15px 4%}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.05);border:1px solid #fff1e6}
+.card img{width:100%;height:140px;object-fit:cover}
+.card-body{padding:10px}
+.card-body h3{font-size:12px;color:#431407}
+.price{color:#ea580c;font-weight:800;font-size:14px;margin:4px 0}
+.add-btn{width:100%;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;padding:7px;border-radius:8px;font-weight:800;font-size:12px}
+footer{background:#431407;color:#ffedd5;padding:25px 5%;text-align:center;font-size:13px}
+.empty{text-align:center;padding:60px 20px;color:#7c2d12;grid-column:1/-1}
 </style>
 </head>
 <body>
-<div class="header">
-<h1>🏪 الفيصل ستور - طنطا</h1>
-<p>01120718172</p>
-</div>
-
-<div class="products">
-<div class="card">
-<img src="karden.jpg">
-<div class="info">
-<div class="name">كاردن</div>
-<div class="price">120 جنيه</div>
-<a class="btn" href="https://wa.me/201120718172?text=عايز%20كاردن%20ب%20120%20جنيه" target="_blank">📱 واتساب</a>
-</div>
-</div>
-</div>
+<header><div class="logo">فيصل <span>للسبوع والمناسبات</span></div></header>
+<div style="background:#7c2d12;color:#fff;text-align:center;padding:7px;font-size:12px">شحن داخل طنطا وجميع المحافظات - 01120718712</div>
+<div class="products" id="products"></div>
+<footer><h3>فيصل للسبوع والمناسبات - طنطا</h3><p>واتساب: 01120718712</p></footer>
+<script>
+const products=[];
+function render(){
+let c=document.getElementById('products');
+c.innerHTML=`<div class="empty"><h3>الموقع فاضي دلوقتي 🛒</h3><p>ابعتلي الصور والاسعار وهضيفهالك</p></div>`;
+}
+render();
+</script>
 </body>
-</html>
+</html>              
