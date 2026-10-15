@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فيصل للسبوع والمناسبات - طنطا</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيصل للسبوع والمناسبات</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
 body{background:#fffaf7}
 header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #fde68a;display:flex;justify-content:space-between;align-items:center;padding:12px 4%}
-.logo{font-weight:800;font-size:18px;color:#7c2d12}
-.shipping{background:#7c2d12;color:#fff;text-align:center;padding:7px;font-weight:700;font-size:12px}
+.logo{font-weight:800;color:#7c2d12} .logo span{color:#ea580c}
+.shipping{background:#7c2d12;color:#fff;text-align:center;padding:7px;font-size:12px;font-weight:700}
 .cart-btn{position:relative;background:#7c2d12;color:#fff;border:none;padding:9px 18px;border-radius:30px;font-weight:800;cursor:pointer}
 #cart-count{position:absolute;top:-6px;left:-6px;background:red;color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
-.cats{display:flex;gap:7px;padding:12px 4%;overflow-x:auto;white-space:nowrap;background:#fffaf7;border-bottom:1px solid #fde68a}
-.cat{padding:8px 16px;border-radius:30px;border:1.5px solid #fed7aa;background:#fff;font-weight:700;font-size:12px;cursor:pointer}
-.cat.active{background:#7c2d12;color:#fff;border-color:#7c2d12}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;padding:15px 4%}
-.empty{text-align:center;padding:60px 20px;color:#999}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;padding:15px 4%}
+.card{background:#fff;border-radius:16px;padding:10px;box-shadow:0 3px 12px rgba(0,0,0,0.06);border:1px solid #fff1e6;text-align:center}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:12px}
+.card h3{font-size:13px;color:#431407;margin:8px 0}
+.price{color:#ea580c;font-weight:800;font-size:15px}
+.add-btn{width:100%;background:#7c2d12;color:#fff;border:none;padding:8px;border-radius:8px;font-weight:800;cursor:pointer;margin-top:6px}
 #cart-drawer{position:fixed;top:0;left:-100%;width:88%;max-width:360px;height:100%;background:#fff;z-index:300;transition:0.3s;padding:18px;display:flex;flex-direction:column}
 #cart-drawer.open{left:0}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;z-index:250}
 .overlay.show{display:block}
-footer{background:#431407;color:#ffedd5;padding:25px 5%;text-align:center;font-size:13px}
+footer{background:#431407;color:#ffedd5;padding:20px;text-align:center}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
-<header><div class="logo">فيصل <span>للسبوع والمناسبات</span></div><button class="cart-btn" onclick="openCart()">السلة <span id="cart-count">0</span></button></header>
+<header><div class="logo">فيصل <span>للسبوع</span></div><button class="cart-btn" onclick="openCart()">السلة <span id="cart-count">0</span></button></header>
 <div class="shipping">شحن داخل طنطا وجميع المحافظات - واتساب 01120718172</div>
-<div class="cats">
-<button class="cat active">الكل</button>
-<button class="cat">علب السبوع</button>
-<button class="cat">ديكور</button>
-<button class="cat">لعب اطفال</button>
-<button class="cat">شوكولاتة</button>
-<button class="cat">اعياد ميلاد</button>
-</div>
-<div class="products" id="products"><div class="empty">جاري تجهيز المنتجات...<br>ابعت الصور والاسعار على الواتساب</div></div>
-<div id="cart-drawer"><h3 style="color:#7c2d12">سلة الطلبات</h3><div id="cart-items" style="flex:1;overflow:auto;margin-top:12px"></div><div style="border-top:1px dashed #fed7aa;padding-top:10px"><button onclick="window.open('https://wa.me/201120718172','_blank')" style="width:100%;background:#25D366;color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800;margin-top:10px;cursor:pointer">تواصل واتساب</button><button onclick="closeCart()" style="width:100%;margin-top:7px;background:#fff7ed;border:1px solid #fed7aa;padding:8px;border-radius:8px;cursor:pointer">اغلاق</button></div></div>
-<footer><h3>فيصل للسبوع والمناسبات - طنطا</h3><p>واتساب: 01120718172</p></footer>
+<div class="products" id="products"></div>
+<div id="cart-drawer"><h3 style="color:#7c2d12">سلة الطلبات</h3><div id="cart-items" style="flex:1;overflow:auto;margin-top:12px"></div><div style="border-top:1px dashed #fed7aa;padding-top:10px"><div style="display:flex;justify-content:space-between;font-weight:800"><span>الاجمالي:</span><span id="total" style="color:#ea580c">0 جنيه</span></div><button onclick="checkout()" style="width:100%;background:#25D366;color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800;margin-top:10px;cursor:pointer">اتمام الطلب واتساب</button><button onclick="closeCart()" style="width:100%;margin-top:7px;background:#fff7ed;border:1px solid #fed7aa;padding:8px;border-radius:8px;cursor:pointer">اغلاق</button></div></div>
+<footer>فيصل للسبوع - 01120718172</footer>
 <script>
+const WHATSAPP="201120718172";
+const products=[
+{id:1,name:"مصحف جولد",price:15,img:"IMG-20261015-WA0042.jpeg"},
+];
+let cart=[];
+function render(){document.getElementById('products').innerHTML=products.map(p=>`<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="price">${p.price} جنيه</div><button class="add-btn" onclick="addToCart(${p.id})">اضف للسلة</button></div>`).join('');}
+render();
+function addToCart(id){let p=products.find(x=>x.id===id);let ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({...p,qty:1});update();openCart();}
+function update(){document.getElementById('cart-count').innerText=cart.reduce((s,i)=>s+i.qty,0);let d=document.getElementById('cart-items');if(!cart.length)d.innerHTML="<p style='text-align:center;color:#888'>السلة فارغة</p>";else d.innerHTML=cart.map(i=>`<div style='display:flex;justify-content:space-between;margin-bottom:10px'><div><div style='font-size:12px;font-weight:700'>${i.name}</div><div style='color:#ea580c;font-weight:800'>${i.price}ج x ${i.qty}</div></div><button onclick='removeItem(${i.id})' style='color:red;background:none;border:none'>حذف</button></div>`).join('');document.getElementById('total').innerText=cart.reduce((s,i)=>s+i.price*i.qty,0)+" جنيه";}
+function removeItem(id){cart=cart.filter(i=>i.id!==id);update();}
 function openCart(){document.getElementById('cart-drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function checkout(){if(!cart.length){alert('السلة فارغة');return;}let msg="طلب جديد%0A";cart.forEach(i=>{msg+=`- ${i.name} (${i.qty}) = ${i.price*i.qty}ج%0A`;});msg+=`%0Aالاجمالي: ${cart.reduce((s,i)=>s+i.price*i.qty,0)}ج`;window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");}
 </script>
 </body>
 </html>
